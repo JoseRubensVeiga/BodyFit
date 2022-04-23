@@ -1,3 +1,23 @@
 <div class="sign-in__container">
-  <form class="sign-in__form"></form>
+  <div class="sign-in__left-side">
+    <form class="sign-in__form">
+      <h1 class="display-6">Bem vindo,</h1>
+      <hr class="w-25 mb-4 mt-n4" />
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input type="text" matInput />
+        <mat-error>Este campo é obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input type="password" matInput />
+        <mat-error>Este campo é obrigatório</mat-error>
+      </mat-form-field>
+
+      <button class="w-100" mat-flat-button color="primary" type="button">
+        Entrar
+      </button>
+    </form>
+  </div>
+  <div class="sign-in__right-side"></div>
 </div>
