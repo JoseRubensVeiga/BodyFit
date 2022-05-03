@@ -1,6 +1,6 @@
 <div class="sign-in__container">
   <div class="sign-in__left-side">
-    <form class="sign-in__form">
+    <form class="sign-in__form" (ngSubmit)="onSubmit()">
       <h1 class="display-6">Bem vindo,</h1>
       <hr class="w-25 mb-4 mt-n4" />
       <mat-form-field class="w-100" appearance="outline">
@@ -14,9 +14,19 @@
         <mat-error>Este campo é obrigatório</mat-error>
       </mat-form-field>
 
-      <button class="w-100" mat-flat-button color="primary" type="button">
+      <button
+        class="w-100"
+        mat-flat-button
+        color="primary"
+        type="button"
+        type="submit"
+      >
         Entrar
       </button>
+      <section class="sign-in__actions">
+        <a routerLink="/">Criar nova conta</a>
+        <a routerLink="/">Recuperar senha</a>
+      </section>
     </form>
   </div>
   <div class="sign-in__right-side"></div>

@@ -7,12 +7,17 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { SignInComponent } from './components/sign-in';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SignInComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
+
+    ReactiveFormsModule,
+    FormsModule,
+
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
