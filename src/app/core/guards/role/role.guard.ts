@@ -17,13 +17,7 @@ import { showNotificationError } from '../../store/notification/notification-act
 export class RoleGuard implements CanActivate {
   constructor(private store: Store<AppState>, private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     const roles = route.data['roles'] as string[];
 
     return this.store.select(selectUserRole).pipe(
