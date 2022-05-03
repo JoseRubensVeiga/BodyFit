@@ -12,7 +12,7 @@ import { showNotificationError } from 'src/app/core/store/notification/notificat
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
   formGroup = this.initForm();
 
   isTryingToSignIn$ = this.store.select(selectIsTryingToSignIn);
@@ -21,8 +21,6 @@ export class SignInComponent implements OnInit {
     private store: Store<AppState>,
     private formBuilder: FormBuilder
   ) {}
-
-  ngOnInit(): void {}
 
   onSubmit(): void {
     if (this.formGroup.invalid) {

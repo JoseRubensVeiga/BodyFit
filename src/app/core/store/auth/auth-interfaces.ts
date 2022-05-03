@@ -1,4 +1,6 @@
+import { User } from '../../interfaces/auth/User';
+
 export interface AuthState {
-  isLoggedIn: boolean;
+  user?: User;
   isTryingToSignIn: boolean;
 }

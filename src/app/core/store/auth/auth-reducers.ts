@@ -3,17 +3,28 @@ import { signInError, signInRequest, signInSuccess } from './auth-actions';
 import { AuthState } from './auth-interfaces';
 
 const initialState: AuthState = {
-  isLoggedIn: false,
   isTryingToSignIn: false,
 };
 
+const _signInSuccess = (state: AuthState): AuthState => ({
+  ...state,
+  isTryingToSignIn: false,
+});
+
+const _signInError = (state: AuthState): AuthState => ({
+  ...state,
+  isTryingToSignIn: false,
+});
+
+const _signInRequest = (state: AuthState): AuthState => ({
+  ...state,
+  isTryingToSignIn: true,
+});
+
 export const authReducer = createReducer(
   initialState,
-  on(signInSuccess, (state) => ({
-    ...state,
-    isLoggedIn: true,
-    isTryingToSignIn: false,
-  })),
-  on(signInError, (state) => ({ ...state, isTryingToSignIn: false })),
-  on(signInRequest, (state) => ({ ...state, isTryingToSignIn: true }))
+
+  on(signInSuccess, _signInSuccess),
+  on(signInError, _signInError),
+  on(signInRequest, _signInRequest)
 );

@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { SignInPayload } from '../../interfaces/auth/SignInPayload';
+import { SignInResponse } from '../../interfaces/auth/SignInResponse';
 
 export enum AuthActions {
   SignInRequest = '[AUTH] Sign In Request',
@@ -12,6 +13,9 @@ export const signInRequest = createAction(
   props<{ payload: SignInPayload }>()
 );
 
-export const signInSuccess = createAction(AuthActions.SignInSuccess);
+export const signInSuccess = createAction(
+  AuthActions.SignInSuccess,
+  props<{ payload: SignInResponse }>()
+);
 
 export const signInError = createAction(AuthActions.SignInError);
