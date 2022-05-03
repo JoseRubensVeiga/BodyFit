@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './store/auth/auth-reducers';
 import { NotificationEffects } from './store/notification/notification-effects';
+import { NotificationService } from './services/notification';
 
 @NgModule({
   declarations: [],
@@ -21,5 +22,6 @@ import { NotificationEffects } from './store/notification/notification-effects';
     }),
     EffectsModule.forRoot([NotificationEffects]),
   ],
+  providers: [NotificationService],
 })
 export class CoreModule {}
