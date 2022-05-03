@@ -12,7 +12,7 @@ import { authReducer } from './store/auth/auth-reducers';
 import { NotificationEffects } from './store/notification/notification-effects';
 import { NotificationService } from './services/notification';
 import { AuthEffects } from './store/auth/auth-effects';
-import { AuthService } from './services/auth/auth.service';
+import { AuthService } from './services/auth';
 
 @NgModule({
   declarations: [],

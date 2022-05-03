@@ -6,6 +6,8 @@ import { addDays } from 'date-fns';
 
 import { SignInPayload } from '../../interfaces/auth/SignInPayload';
 import { SignInResponse } from '../../interfaces/auth/SignInResponse';
+import { TokenResponse } from '../../interfaces/auth/TokenResponse';
+import { User } from '../../interfaces/auth/User';
 
 @Injectable()
 export class AuthService {
@@ -17,16 +19,22 @@ export class AuthService {
       'eyJlbWFpbCI6ImF5bGFuQGJvc2Nhcmluby5jb20iLCJwYXNzd29yZCI6InlhMGdzcWh5NHd6dnV2YjQifQ.' +
       'yN_8-Mge9mFgsnYHnPEh_ZzNP7YKvSbQ3Alug9HMCsM';
 
-    return of({
-      token: {
-        accessToken,
-        tokenType: 'Bearer',
-        expiresIn: addDays(Date.now(), 1).getDate(),
-      },
-      user: {
-        name: 'José Veiga',
-        type: 'default',
-      },
-    }).pipe(delay(500));
+    const token: TokenResponse = {
+      accessToken,
+      tokenType: 'Bearer',
+      expiresIn: addDays(Date.now(), 1).getDate(),
+    };
+
+    const user: User = {
+      name: 'José Veiga',
+      role: 'default',
+    };
+
+    const signInResponse = {
+      token,
+      user,
+    };
+
+    return of(signInResponse).pipe(delay(500));
   }
 }

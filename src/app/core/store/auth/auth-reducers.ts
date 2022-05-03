@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+import { SignInResponse } from '../../interfaces/auth/SignInResponse';
 import { signInError, signInRequest, signInSuccess } from './auth-actions';
 import { AuthState } from './auth-interfaces';
 
@@ -6,9 +7,14 @@ const initialState: AuthState = {
   isTryingToSignIn: false,
 };
 
-const _signInSuccess = (state: AuthState): AuthState => ({
+const _signInSuccess = (
+  state: AuthState,
+  action: { payload: SignInResponse }
+): AuthState => ({
   ...state,
   isTryingToSignIn: false,
+  user: action.payload.user,
+  token: action.payload.token,
 });
 
 const _signInError = (state: AuthState): AuthState => ({

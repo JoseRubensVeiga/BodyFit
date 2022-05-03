@@ -12,3 +12,8 @@ export const selectIsAuthenticated = createSelector(
   _selectAuth,
   (state) => !!state.user
 );
+
+export const selectUserRole = createSelector(
+  _selectAuth,
+  (state) => state.user?.role
+);
