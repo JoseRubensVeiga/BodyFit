@@ -1,4 +1,4 @@
-import { AuthState } from './AuthState';
+import { AuthState } from '../../store/auth/auth-interfaces';
 
 export interface AppState {
   auth: AuthState;
