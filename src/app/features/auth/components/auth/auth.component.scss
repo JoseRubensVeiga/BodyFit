@@ -1,0 +1,25 @@
+.auth__container {
+  height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: stretch;
+}
+
+.auth__right-side {
+  background-image: url(../../../../../assets/images/login-background.jpg);
+
+  background-size: cover;
+  flex: 1;
+}
+
+.auth__left-side {
+  width: 600px;
+
+  background-color: #f1f1f1;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

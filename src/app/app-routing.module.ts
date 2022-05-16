@@ -5,20 +5,20 @@ import { RoleGuard } from './core/guards/role';
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     loadChildren: () =>
-      import('./modules/auth/auth.module').then((m) => m.AuthModule),
+      import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'home',
     loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomeModule),
+      import('./features/home/home.module').then((m) => m.HomeModule),
     canActivate: [AuthGuard],
   },
   {
     path: 'students',
     loadChildren: () =>
-      import('./modules/students/students.module').then(
+      import('./features/students/students.module').then(
         (m) => m.StudentsModule
       ),
     canActivate: [RoleGuard],
@@ -27,7 +27,7 @@ const routes: Routes = [
 
   {
     path: '**',
-    redirectTo: 'auth',
+    redirectTo: 'home',
   },
 ];
 

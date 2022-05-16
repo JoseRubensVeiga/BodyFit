@@ -25,7 +25,7 @@ export class RoleGuard implements CanActivate {
       map((userRole) => {
         if (!userRole) {
           this.showNonAuthenticatedErrorNofification();
-          return this.router.parseUrl('login');
+          return this.router.parseUrl('/login');
         }
 
         const hasRole = roles.includes(userRole as string);

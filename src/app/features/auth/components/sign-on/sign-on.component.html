@@ -1,0 +1,52 @@
+<form class="sign-on__form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <h1 class="display-6">Criar uma conta</h1>
+  <hr class="w-25 mb-4 mt-n4" />
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>E-mail</mat-label>
+    <input type="text" matInput formControlName="email" />
+    <mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+      Este campo é obrigatório
+    </mat-error>
+    <mat-error *ngIf="formGroup.get('email')?.hasError('email')">
+      Digite o e-mail corretamente
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Senha</mat-label>
+    <input type="password" matInput formControlName="password" />
+    <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
+      Este campo é obrigatório
+    </mat-error>
+    <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
+      Insira pelo menos 6 caracteres.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Confirmar</mat-label>
+    <input
+      type="passwordConfirmation"
+      matInput
+      formControlName="passwordConfirmation"
+    />
+    <mat-error>As senhas não coincidem</mat-error>
+  </mat-form-field>
+
+  <button
+    class="w-100"
+    mat-flat-button
+    color="primary"
+    type="button"
+    type="submit"
+  >
+    <!-- [disabled]="isTryingToSignIn$ | async" -->
+    <!-- <span *ngIf="isTryingToSignIn$ | async">Entrando...</span> -->
+    <span>Entrar</span>
+  </button>
+  <section class="sign-on__actions">
+    <a routerLink="/login">Já tem uma conta?</a>
+    <a routerLink="/recuperar-senha">Recuperar senha</a>
+  </section>
+</form>
