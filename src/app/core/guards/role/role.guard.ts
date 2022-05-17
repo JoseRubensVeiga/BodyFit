@@ -17,6 +17,9 @@ import { showNotificationError } from '../../store/notification/notification-act
 export class RoleGuard implements CanActivate {
   constructor(private store: Store<AppState>, private router: Router) {}
 
+  /**
+   * Define se o usuário pode acessar a rota solicitada
+   */
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     const roles = route.data['roles'] as string[];
 
@@ -40,12 +43,22 @@ export class RoleGuard implements CanActivate {
     );
   }
 
+  /**
+   * Dispara uma action que mostra uma notificação
+   * que informa para o usuário que ele não está
+   * autenticado
+   */
   private showNonAuthenticatedErrorNofification(): void {
     this.store.dispatch(
       showNotificationError({ payload: 'Você não está autenticado' })
     );
   }
 
+  /**
+   * Dispara uma action que mostra uma notificação
+   * que informa para o usuário que ele não tem
+   * autorização para acessar essa página.
+   */
   private showForbiddenPageErrorNotification(): void {
     this.store.dispatch(
       showNotificationError({

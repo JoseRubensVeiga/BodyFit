@@ -13,12 +13,23 @@ import { selectIsAuthenticated } from '../../store/auth/auth-selectors';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  /**
+   * Observable que representa se o usuário
+   * está autenticado
+   */
   selectIsAuthenticated$ = this.store.select(selectIsAuthenticated);
 
+  /**
+   * Lista de rotas que não o usuário não
+   * precisa estar logado para acessar
+   */
   publicRoutes = ['/login', '/register'];
 
   constructor(private store: Store, private router: Router) {}
 
+  /**
+   * Define se o usuário pode acessar a rota solicitada
+   */
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     return this.selectIsAuthenticated$.pipe(
       map((isAuthenticated) => {
@@ -41,6 +52,13 @@ export class AuthGuard implements CanActivate {
     );
   }
 
+  /**
+   * Verifica se a rota solicitada é pública com base
+   * na variável global `publicRoutes`
+   *
+   * @returns Um booleano que representa se a rota
+   * solicitada é pública
+   */
   private isPublicRoute(route: ActivatedRouteSnapshot): boolean {
     return this.publicRoutes.some((publicRoute) =>
       route.url[0].path.startsWith(publicRoute)

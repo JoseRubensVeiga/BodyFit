@@ -12,9 +12,9 @@ export enum AuthActions {
   SignOnSuccess = '[Auth] Sign On Success',
   SignOnError = '[Auth] Sign On Error',
 
-  ToggleSignOnPassword = '[Auth] Toggle Sign On Password',
-
   ToggleSignInPassword = '[Auth] Toggle Sign In Password',
+
+  ToggleSignOnPassword = '[Auth] Toggle Sign On Password',
 }
 
 export const signInRequest = createAction(

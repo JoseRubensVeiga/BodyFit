@@ -18,6 +18,11 @@ import {
 
 @Injectable()
 export class AuthEffects {
+  /**
+   * Faz uma chamada ao serviço de criação de usuário e emite
+   * a action `signOnSuccess` caso sucesso ou a
+   * `signOnError` caso erro
+   */
   signOn$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signOnRequest),
@@ -30,6 +35,10 @@ export class AuthEffects {
     )
   );
 
+  /**
+   * Navega o usuário para a rota `/login` e
+   * mostra uma notificação de sucesso
+   */
   signOnSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signOnSuccess),
@@ -42,6 +51,10 @@ export class AuthEffects {
     )
   );
 
+  /**
+   * Mostra uma notificação de erro obtendo
+   * o texto do payload da action `signOnError`
+   */
   signOnError$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signOnError),
@@ -49,6 +62,11 @@ export class AuthEffects {
     )
   );
 
+  /**
+   * Faz uma chamada ao serviço de login e emite
+   * a action `signInSuccess` caso sucesso ou a
+   * `signInError` caso erro
+   */
   signIn$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signInRequest),
@@ -61,14 +79,10 @@ export class AuthEffects {
     )
   );
 
-  signInError$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(signInError),
-      map(() => 'E-mail e/ou senha incorretos.'),
-      map((msg) => showNotificationError({ payload: msg }))
-    )
-  );
-
+  /**
+   * Navega o usuário para a rota `/home` e
+   * mostra uma notificação de sucesso
+   */
   signInSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signInSuccess),
@@ -76,6 +90,18 @@ export class AuthEffects {
       map((action) => action.payload.user.name),
       map((userName) => `Bem vindo, ${userName}!`),
       map((msg) => showNotificationSuccess({ payload: msg }))
+    )
+  );
+
+  /**
+   * Mostra uma notificação de erro obtendo
+   * o texto do payload da action `signInError`
+   */
+  signInError$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signInError),
+      map(() => 'E-mail e/ou senha incorretos.'),
+      map((msg) => showNotificationError({ payload: msg }))
     )
   );
 
