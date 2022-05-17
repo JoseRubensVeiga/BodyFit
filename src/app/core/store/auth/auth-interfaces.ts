@@ -4,5 +4,14 @@ import { User } from '../../interfaces/auth/User';
 export interface AuthState {
   user?: User;
   token?: TokenResponse;
-  isTryingToSignIn: boolean;
+
+  signIn: {
+    showPassword: boolean;
+    isTryingToSignIn: boolean;
+  };
+
+  signOn: {
+    showPassword: boolean;
+    isTryingToSignOn: boolean;
+  };
 }

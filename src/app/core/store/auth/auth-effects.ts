@@ -7,10 +7,48 @@ import {
   showNotificationError,
   showNotificationSuccess,
 } from '../notification/notification-actions';
-import { signInError, signInRequest, signInSuccess } from './auth-actions';
+import {
+  signInError,
+  signInRequest,
+  signInSuccess,
+  signOnError,
+  signOnRequest,
+  signOnSuccess,
+} from './auth-actions';
 
 @Injectable()
 export class AuthEffects {
+  signOn$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signOnRequest),
+      switchMap((action) =>
+        this.authService.signOn(action.payload).pipe(
+          map(() => signOnSuccess()),
+          catchError(({ message }) => of(signOnError({ payload: message })))
+        )
+      )
+    )
+  );
+
+  signOnSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signOnSuccess),
+      tap(() => this.router.navigate(['/login'])),
+      map(
+        () =>
+          'Usuário criado com sucesso! Entre com seu email e senha para continuar. '
+      ),
+      map((msg) => showNotificationSuccess({ payload: msg }))
+    )
+  );
+
+  signOnError$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signOnError),
+      map((action) => showNotificationError({ payload: action.payload }))
+    )
+  );
+
   signIn$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signInRequest),

@@ -1,42 +1,45 @@
-<div class="sign-in__container">
-  <div class="sign-in__left-side">
-    <form class="sign-in__form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-      <h1 class="display-6">Bem vindo,</h1>
-      <hr class="w-25 mb-4 mt-n4" />
+<form class="sign-in__form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <h1 class="display-6">Bem vindo,</h1>
+  <hr class="w-25 mb-4 mt-n4" />
 
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>E-mail</mat-label>
-        <input type="text" matInput formControlName="email" />
-        <mat-error *ngIf="formGroup.get('email')?.hasError('required')">
-          Este campo é obrigatório
-        </mat-error>
-        <mat-error *ngIf="formGroup.get('email')?.hasError('email')">
-          Digite o e-mail corretamente
-        </mat-error>
-      </mat-form-field>
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>E-mail</mat-label>
+    <input type="text" matInput formControlName="email" />
+    <mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+      Este campo é obrigatório
+    </mat-error>
+    <mat-error *ngIf="formGroup.get('email')?.hasError('email')">
+      Digite o e-mail corretamente
+    </mat-error>
+  </mat-form-field>
 
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Senha</mat-label>
-        <input type="password" matInput formControlName="password" />
-        <mat-error>Este campo é obrigatório</mat-error>
-      </mat-form-field>
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Senha</mat-label>
+    <input
+      [type]="(showPassword$ | async) ? 'text' : 'password'"
+      matInput
+      formControlName="password"
+    />
+    <button mat-icon-button matSuffix (click)="togglePassword()" type="button">
+      <mat-icon color="primary">
+        {{ (showPassword$ | async) ? "visibility_off" : "visibility" }}
+      </mat-icon>
+    </button>
+    <mat-error>Este campo é obrigatório</mat-error>
+  </mat-form-field>
 
-      <button
-        class="w-100"
-        mat-flat-button
-        color="primary"
-        type="button"
-        type="submit"
-        [disabled]="isTryingToSignIn$ | async"
-      >
-        <span *ngIf="isTryingToSignIn$ | async">Entrando...</span>
-        <span *ngIf="(isTryingToSignIn$ | async) === false">Entrar</span>
-      </button>
-      <section class="sign-in__actions">
-        <a routerLink="/registrar">Criar nova conta</a>
-        <a routerLink="/recuperar-senha">Recuperar senha</a>
-      </section>
-    </form>
-  </div>
-  <div class="sign-in__right-side"></div>
-</div>
+  <button
+    class="w-100"
+    mat-flat-button
+    color="primary"
+    type="button"
+    type="submit"
+    [disabled]="isTryingToSignIn$ | async"
+  >
+    <span *ngIf="isTryingToSignIn$ | async">Entrando...</span>
+    <span *ngIf="(isTryingToSignIn$ | async) === false">Entrar</span>
+  </button>
+  <section class="sign-in__actions">
+    <a routerLink="/registrar">Criar nova conta</a>
+  </section>
+</form>

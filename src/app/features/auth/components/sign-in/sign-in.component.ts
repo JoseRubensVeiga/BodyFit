@@ -3,8 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { SignInPayload } from 'src/app/core/interfaces/auth/SignInPayload';
 import { AppState } from 'src/app/core/interfaces/store/AppState';
-import { signInRequest } from 'src/app/core/store/auth/auth-actions';
-import { selectIsTryingToSignIn } from 'src/app/core/store/auth/auth-selectors';
+import {
+  signInRequest,
+  toggleSignInPassword,
+} from 'src/app/core/store/auth/auth-actions';
+import {
+  selectIsTryingToSignIn,
+  selectSignInShowPassword,
+} from 'src/app/core/store/auth/auth-selectors';
 import { showNotificationError } from 'src/app/core/store/notification/notification-actions';
 
 @Component({
@@ -16,6 +22,8 @@ export class SignInComponent implements OnInit {
   formGroup!: FormGroup;
 
   isTryingToSignIn$ = this.store.select(selectIsTryingToSignIn);
+
+  showPassword$ = this.store.select(selectSignInShowPassword);
 
   constructor(
     private store: Store<AppState>,
@@ -35,6 +43,10 @@ export class SignInComponent implements OnInit {
     }
 
     this.dispatchSignInRequest();
+  }
+
+  togglePassword(): void {
+    this.store.dispatch(toggleSignInPassword());
   }
 
   private getSignInPayload(): SignInPayload {

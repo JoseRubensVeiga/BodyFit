@@ -1,19 +1,34 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AuthState } from './auth-interfaces';
 
-const _selectAuth = createFeatureSelector<AuthState>('auth');
+const selectFeature = createFeatureSelector<AuthState>('auth');
 
 export const selectIsTryingToSignIn = createSelector(
-  _selectAuth,
-  (state) => state.isTryingToSignIn
+  selectFeature,
+  (state) => state.signIn.isTryingToSignIn
+);
+
+export const selectIsTryingToSignOn = createSelector(
+  selectFeature,
+  (state) => state.signOn.isTryingToSignOn
 );
 
 export const selectIsAuthenticated = createSelector(
-  _selectAuth,
+  selectFeature,
   (state) => !!state.user
 );
 
 export const selectUserRole = createSelector(
-  _selectAuth,
+  selectFeature,
   (state) => state.user?.role
+);
+
+export const selectSignOnShowPassword = createSelector(
+  selectFeature,
+  (state) => state.signOn.showPassword
+);
+
+export const selectSignInShowPassword = createSelector(
+  selectFeature,
+  (state) => state.signIn.showPassword
 );
