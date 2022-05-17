@@ -24,6 +24,29 @@ const initialState: AuthState = {
   },
 };
 
+/**
+ * Atualiza o status de tentando logar para `true`
+ * quando o usuário tentar fazer login
+ *
+ * @param state Snapshot do estado atual
+ * @returns Estado alterado
+ */
+const _signInRequest = (state: AuthState): AuthState => ({
+  ...state,
+  signIn: {
+    ...state.signIn,
+    isTryingToSignIn: true,
+  },
+});
+
+/**
+ * Atualiza o status de tentando logar para `false`
+ * e insere no estado os dados JWT e do usuário
+ * logado quando o usuário consegue fazer login
+ *
+ * @param state Snapshot do estado atual
+ * @returns Estado alterado
+ */
 const _signInSuccess = (
   state: AuthState,
   action: { payload: SignInResponse }
@@ -37,6 +60,13 @@ const _signInSuccess = (
   token: action.payload.token,
 });
 
+/**
+ * Atualiza o status de tentando logar para `false`
+ * quando há um erro na chamada de login
+ *
+ * @param state Snapshot do estado atual
+ * @returns Estado alterado
+ */
 const _signInError = (state: AuthState): AuthState => ({
   ...state,
   signOn: {
@@ -45,14 +75,13 @@ const _signInError = (state: AuthState): AuthState => ({
   },
 });
 
-const _signInRequest = (state: AuthState): AuthState => ({
-  ...state,
-  signIn: {
-    ...state.signIn,
-    isTryingToSignIn: true,
-  },
-});
-
+/**
+ * Atualiza o status de tentando criar conta para `true`
+ * quando o usuário tenta criar uma conta
+ *
+ * @param state Snapshot do estado atual
+ * @returns Estado alterado
+ */
 const _signOnRequest = (state: AuthState): AuthState => ({
   ...state,
   signOn: {
@@ -61,6 +90,13 @@ const _signOnRequest = (state: AuthState): AuthState => ({
   },
 });
 
+/**
+ * Atualiza o status de tentando criar conta para `false`
+ * quando o usuário consegue criar uma conta
+ *
+ * @param state Snapshot do estado atual
+ * @returns Estado alterado
+ */
 const _signOnSuccess = (state: AuthState): AuthState => ({
   ...state,
   signOn: {
@@ -69,6 +105,13 @@ const _signOnSuccess = (state: AuthState): AuthState => ({
   },
 });
 
+/**
+ * Atualiza o status de tentando criar conta para `false`
+ * quando há um erro na chamada de criação de conta
+ *
+ * @param state Snapshot do estado atual
+ * @returns Estado alterado
+ */
 const _signOnError = (state: AuthState): AuthState => ({
   ...state,
   signOn: {
@@ -77,6 +120,13 @@ const _signOnError = (state: AuthState): AuthState => ({
   },
 });
 
+/**
+ * Alterna o estado de mostrar/esconder a senha na tela de
+ * login
+ *
+ * @param state Snapshot do estado atual
+ * @returns Estado alterado
+ */
 const _toggleSignInPassword = (state: AuthState): AuthState => ({
   ...state,
   signIn: {
@@ -85,6 +135,13 @@ const _toggleSignInPassword = (state: AuthState): AuthState => ({
   },
 });
 
+/**
+ * Alterna o estado de mostrar/esconder a senha na tela de
+ * criação de conta
+ *
+ * @param state Snapshot do estado atual
+ * @returns Estado alterado
+ */
 const _toggleSignOnPassword = (state: AuthState): AuthState => ({
   ...state,
   signOn: {
